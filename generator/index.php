@@ -2,30 +2,41 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Genetatot</title>
+	<title>Genetatot robots.txt</title>
 	<style>
 		.link{
 			width: 500px;
 			margin: 0px auto;
 			text-align: right;
 		}
-		.plus{
+		.plus span{
 			font-size: 20px;
 			font-weight: bold;
 			cursor: pointer;
 		}
+		.ready{
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
+	<?
+	if( file_exists( '../robots.txt' ) && file_exists( '../sitemap.xml' ) ):
+	?>
+		<h1 class="ready">Ваш сайт готов к индексации</h1>
+	<?
+	endif;
+	?>
+	
 	<div class="link">
-		<a href="geratorsitemap.php">Создать sitemap.xml</a>
+		<a href="generatorsitemap.php">Управение sitemap.xml</a>
 	</div>
 	<?
 	if( !file_exists( '../robots.txt' ) ):
 	?>	
 
 		<h3>
-			Сформировать файл "robots.txt"
+			Создать файл "robots.txt"
 		</h3>
 
 		<form action="set_robots.php" method="post">
@@ -60,7 +71,7 @@
 			echo htmlspecialchars( $line ) . "<br>";
 		}
 
-		echo "<a href='deleterobot.php'>Удалить и перезаписать файл</a><br>";
+		echo "<br><a href='deleterobot.php'>Удалить и перезаписать файл</a><br>";
 
 	else:
 		echo '<h3>Файл robots.txt еще не создан!</h3>';
